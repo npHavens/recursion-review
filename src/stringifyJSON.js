@@ -19,35 +19,34 @@ if (typeof obj === 'string'){
 
 //deals with array cases
 if(Array.isArray(obj)){
-  var arrayString = '[';
+  //var arrayString = '[';
+  var result = [];
   for( var i = 0; i < obj.length; i++){
-    if( i > 0){
-      arrayString+= ',';
-    }
-    arrayString += stringifyJSON(obj[i]);
+    //if( i > 0){
+      //arrayString+= ',';
+    result.push(stringifyJSON(obj[i]));
   }
-  arrayString+= ']';
-  return arrayString;
+  //arrayString+= ']';
+  return '[' + result.join(',') + ']';
 }
 
 else if (typeof obj === 'object'){
-  var objectString = '{';
-  var commaCounter = 0;
+  var result = [];
+  //var objectString = '{';
+  //var commaCounter = 0;
 
   for( var key in obj){
     if(typeof stringifyJSON(obj[key]) === 'undefined'){
       continue;
-    }
-    else {
-       if (commaCounter > 0 ){
-        objectString+= ',';
-      }
-      objectString+= '"' + key + '"' + ':' + stringifyJSON(obj[key]);
-      commaCounter++;
+    } else {
+       //if (commaCounter > 0 ){
+        //objectString+= ',';
+      result.push('"' + key + '"' + ':' + stringifyJSON(obj[key]));
+      //commaCounter++;
     }
   }
-  objectString+= '}';
-  return objectString;
+  // objectString+= '}';
+  return '{' + result.join(',') + '}';
 }
 
 };
