@@ -9,16 +9,16 @@ if(obj === null){
   return 'null';
 }
 
-else if (typeof obj === 'boolean'|| typeof obj === 'number'){
+if (typeof obj === 'boolean'|| typeof obj === 'number'){
   return obj.toString();
 }
 
-else if (typeof obj === 'string'){
-  return ('\'' + obj + '\'');
+if (typeof obj === 'string'){
+  return ('"' + obj + '"');
 }
 
 //deals with array cases
-else if(Array.isArray(obj)){
+if(Array.isArray(obj)){
   var arrayString = '[';
   for( var i = 0; i < obj.length; i++){
     if( i > 0){
@@ -33,18 +33,24 @@ else if(Array.isArray(obj)){
 else if (typeof obj === 'object'){
   var objectString = '{';
   var commaCounter = 0;
+
   for( var key in obj){
-    if
+    if(typeof stringifyJSON(obj[key]) === 'undefined'){
+      continue;
+    }
+    else {
+       if (commaCounter > 0 ){
+        objectString+= ',';
+      }
+      objectString+= '"' + key + '"' + ':' + stringifyJSON(obj[key]);
+      commaCounter++;
+    }
   }
+  objectString+= '}';
+  return objectString;
 }
 
-
-
-
-
-
-
-
-
-
 };
+
+
+
