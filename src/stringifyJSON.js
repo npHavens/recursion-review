@@ -14,7 +14,7 @@ else if (typeof obj === 'boolean'|| typeof obj === 'number'){
 }
 
 else if (typeof obj === 'string'){
-  return ()
+  return ('\'' + obj + '\'');
 }
 
 //deals with array cases
@@ -30,7 +30,13 @@ else if(Array.isArray(obj)){
   return arrayString;
 }
 
-
+else if (typeof obj === 'object'){
+  var objectString = '{';
+  var commaCounter = 0;
+  for( var key in obj){
+    if
+  }
+}
 
 
 
